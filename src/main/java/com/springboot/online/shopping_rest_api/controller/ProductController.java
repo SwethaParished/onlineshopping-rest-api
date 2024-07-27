@@ -1,40 +1,48 @@
 package com.springboot.online.shopping_rest_api.controller;
 
-import com.springboot.online.shopping_rest_api.entity.Product;
+import com.springboot.online.shopping_rest_api.entity.Products;
 import com.springboot.online.shopping_rest_api.repo.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequestMapping("/product")
 public class ProductController {
 
     @Autowired
     private ProductRepo productRepo;
 
-    Product product;
+    Products products;
+
+    @GetMapping
+    String index(Model model){
+        model.addAttribute("something","My Products!");
+        return "product";
+    }
 
     @GetMapping("{productId}")
-    public Product getProduct(String productId){ //product;
-        return product;
-                //new Product("1","dress","all size","2","5");
+    public Products getProduct(Products products){ //product;
+        return products;
+        //new Product("1","dress","all size","2","5");
     }
 
     @PostMapping
-    public String createProduct(@RequestBody Product product){
-        this.product=product;
+    public String createProduct(@RequestBody Products products){
+        this.products=products;
         return "Product created successfully";
     }
 
     @PutMapping
-    public String updateProduct(@RequestBody Product product){
-        this.product=product;
+    public String updateProduct(@RequestBody Products products){
+        this.products=products;
         return "Product updated successfully";
     }
-@DeleteMapping({"productId"})
+    @DeleteMapping({"productId"})
     public String deleteProduct(String productId){
-        return product + "Product deleted successfully";
+        return products + "Product deleted successfully";
 
     }
 }
