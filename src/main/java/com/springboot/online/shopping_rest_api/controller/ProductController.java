@@ -17,11 +17,6 @@ public class ProductController {
 
     Products products;
 
-    @GetMapping
-    String index(Model model){
-        model.addAttribute("something","My Products!");
-        return "product";
-    }
 
     @GetMapping("{productId}")
     public Products getProduct(Products products){ //product;
